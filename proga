@@ -1,0 +1,91 @@
+
+/*Дан целочисленный двумерный массив размера M x N, заполненный построчно случайными значениями от -99 до 99. Этот массив вывести на экран. Заменить исходный массив новым, в котором удален ее последний столбец, содержащий только
+отрицательные элементы. Получившийся массив вывести на экран.  Если требуемого столбца нет, то вывести массив без изменений. M и N задаются в main().*/
+
+import java.util.Random;
+
+public class proga {
+    public static void main(String[] args) {
+        int M = 3, N = 3;
+        //M-кол-во строк. N- кол-во столбцов
+        int[][] array = create(N, M);
+        //создаем массив array и присваиваем ему массив, который сделает метод create
+        System.out.println("Массив, зааполненный рандомными числами в интервале -99 - 99");
+        init(array);
+        print(array);
+        //вызовы методов с параметрами array
+        System.out.println("Массив с удалённым последним столбцом, который содержит все  отрицательные элементы, если таковой присутствует");
+        int index = copyIndex(array);
+        //если нужный столбец существует, то печатается новый массив, который заполняется методом deleteColumn
+        if(index!=-1){
+            array = deleteColumn(array, index);
+            print(array);
+        }
+        //если нет столбца, содержащий все отрицательные элементы, вызывается метод print, который печатает ещё раз исходный массив
+        else {
+            print(array);
+        }
+
+
+    }
+    //создаем массив размера n и идем по элементам этого массива, создаем массивы размером m и записываем их в массив array
+    public static int[][] create(int m, int n) {
+        int[][] array = new int[n][];
+        for (int i = 0; i < array.length; i++) {
+            array[i] = new int[m];
+        }
+        return array;
+    }
+    //заполнение массива рандомными числами от -99 до 99
+    public static void init(int[][] a) {
+        Random rand = new Random();
+        for (int i = 0; i < a.length; i++) {
+            for (int j = 0; j < a[i].length; j++) {
+                a[i][j] = rand.nextInt() % 100;
+            }
+        }
+
+    }
+    //вывод массива
+    public static void print(int[][] array) {
+        for (int[] subArray : array) {
+            for (int number : subArray) {
+                System.out.printf("%5d", number);
+            }
+            System.out.println();
+        }
+        System.out.println();
+
+    }
+    //поиск индекса нужного столбца, содержащий все отрицательные элементы
+    public static int copyIndex(int[][] array ) {
+        int index = -1;
+        for (int j = 0; j < array[0].length; j++) {
+            boolean condition = true;
+            for (int i = 0; i < array.length; i++) {
+                if (array[i][j] >= 0) {
+                    condition = false;
+                }
+            }
+
+            if (condition) {
+                index = j;
+
+            }
+        }
+        return index;
+    }
+    //удаление последнего столбца со всеми отрицательными значениями
+    public static int[][] deleteColumn (int[][] array, int index) {
+        int[][] result = new int[array.length][array[0].length - 1];
+        for (int i = 0; i < array.length; i++) {
+            for (int j = 0; j < index; j++) {
+                result[i][j] = array[i][j];
+            }
+            for (int j = index + 1; j < array[i].length; j++) {
+                result[i][j - 1] = array[i][j];
+            }
+        }
+        return result;
+    }
+}
