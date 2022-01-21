@@ -1,0 +1,56 @@
+public class Field {
+    Healthy mas1[][];
+    Healthy mas2[][];
+
+    int n = 21;
+
+    public Field() {
+        mas1 = new Healthy[n][n];
+        mas2 = new Healthy[n][n];
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                mas1[i][j] = new Healthy(i,j);
+                mas2[i][j] = new Healthy(i,j);
+            }
+        }
+    }
+
+    void Init() {
+        mas1[10][10] = new Sick(10, 10);
+    }
+
+    public void update(){
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                mas2[i][j] = mas1[i][j].transform(this);
+
+            }
+        }
+        Healthy[][] newmas;         //обменять местами mas1 и mas2
+        newmas = mas1;
+        mas1 = mas2;
+        mas2 = newmas;
+    }
+
+    public Healthy[][] getMas1() {
+        return mas1;
+    }
+
+
+    public void setMas2(int x, int y, Healthy healthy) {
+        this.mas2[x][y] = healthy;
+    }
+
+
+    public void display(){
+        for (int i = 0 ; i < n ; i++) {
+            for (int j = 0; j < n; j++) {
+                mas1[i][j].print();
+            }
+            System.out.println();
+        }
+        System.out.println();
+        System.out.println();
+    }
+}
