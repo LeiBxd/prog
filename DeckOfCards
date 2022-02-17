@@ -1,0 +1,194 @@
+import java.util.Random;
+public class DeckOfCards {
+
+    private Cards[] deckOfCards = new Cards[36]; //массив колоды
+    private Cards[] deck1 = new Cards[36]; //массив колоды 1 игрока
+    private Cards[] deck2 = new Cards[36]; //массив колоды 2 игрока
+
+    public DeckOfCards(){
+        for(int i=0;i<36;i++){
+            deckOfCards[i] = new Cards(null,null,i);
+            deck1[i] = new Cards(null,null,i);
+            deck2[i] = new Cards(null,null,i);//вызов конструктора карт
+        }
+    }
+
+    public void setDiscription() {
+        for (int i = 0; i < 36; i++) {
+            if (i<9) {
+                for (int a = 0; a < 9; a++)
+                    deckOfCards[i].setMast("♥ ");
+                switch(i){
+                    case 0:
+                        deckOfCards[i].setNumber("6");;
+                        break;
+                    case 1:
+                        deckOfCards[i].setNumber("7");
+                        break;
+                    case 2:
+                        deckOfCards[i].setNumber("8");
+                        break;
+                    case 3:
+                        deckOfCards[i].setNumber("9");
+                        break;
+                    case 4:
+                        deckOfCards[i].setNumber("10");
+                        break;
+                    case 5:
+                        deckOfCards[i].setNumber("J");
+                        break;
+                    case 6:
+                        deckOfCards[i].setNumber("Q");
+                        break;
+                    case 7:
+                        deckOfCards[i].setNumber("K");
+                        break;
+                    case 8:
+                        deckOfCards[i].setNumber("A");
+                        break;    //заполнение части массива с мастью ♥
+                }
+            }
+            if ((i>8)&(i<18)) {
+                for (int a = 0; a < 9; a++)
+                    deckOfCards[i].setMast("♠ ");
+                    switch(i-9){
+                        case 0:
+                            deckOfCards[i].setNumber("6");;
+                            break;
+                        case 1:
+                            deckOfCards[i].setNumber("7");
+                            break;
+                        case 2:
+                            deckOfCards[i].setNumber("8");
+                            break;
+                        case 3:
+                            deckOfCards[i].setNumber("9");
+                            break;
+                        case 4:
+                            deckOfCards[i].setNumber("10");
+                            break;
+                        case 5:
+                            deckOfCards[i].setNumber("J");
+                            break;
+                        case 6:
+                            deckOfCards[i].setNumber("Q");
+                            break;
+                        case 7:
+                            deckOfCards[i].setNumber("K");
+                            break;
+                        case 8:
+                            deckOfCards[i].setNumber("A");
+                            break; //заполнение части массива с мастью ♠
+                    }
+            }
+            if  ((i>17)&(i<27)) {
+                for (int a = 0; a < 9; a++)
+                    deckOfCards[i].setMast("♣ ");
+                    switch(i-18){
+                        case 0:
+                            deckOfCards[i].setNumber("6");;
+                            break;
+                        case 1:
+                            deckOfCards[i].setNumber("7");
+                            break;
+                        case 2:
+                            deckOfCards[i].setNumber("8");
+                            break;
+                        case 3:
+                            deckOfCards[i].setNumber("9");
+                            break;
+                        case 4:
+                            deckOfCards[i].setNumber("10");
+                            break;
+                        case 5:
+                            deckOfCards[i].setNumber("J");
+                            break;
+                        case 6:
+                            deckOfCards[i].setNumber("Q");
+                            break;
+                        case 7:
+                            deckOfCards[i].setNumber("K");
+                            break;
+                        case 8:
+                            deckOfCards[i].setNumber("A");
+                            break; //заполнение части массива с мастью ♣
+                    }
+            }
+            if ((i>26)&(i<36)) {
+                for (int a = 0; a < 9; a++)
+                    deckOfCards[i].setMast("♦ ");
+                    switch(i-27){
+                        case 0:
+                            deckOfCards[i].setNumber("6");;
+                            break;
+                        case 1:
+                            deckOfCards[i].setNumber("7");
+                            break;
+                        case 2:
+                            deckOfCards[i].setNumber("8");
+                            break;
+                        case 3:
+                            deckOfCards[i].setNumber("9");
+                            break;
+                        case 4:
+                            deckOfCards[i].setNumber("10");
+                            break;
+                        case 5:
+                            deckOfCards[i].setNumber("J");
+                            break;
+                        case 6:
+                            deckOfCards[i].setNumber("Q");
+                            break;
+                        case 7:
+                            deckOfCards[i].setNumber("K");
+                            break;
+                        case 8:
+                            deckOfCards[i].setNumber("A");
+                            break;  //заполнение части массива с мастью ♦
+                    }
+            }
+
+        }
+    }
+    public void switcher() {
+        Random r = new Random();
+        int randomId;
+
+        for (int l = 35; l > -1; l--) {
+            randomId = r.nextInt(35);
+            String m1 = deckOfCards[l].getMast();
+            String n1 = deckOfCards[l].getNumber();
+            deckOfCards[l].setMast(deckOfCards[randomId].getMast());
+            deckOfCards[l].setNumber(deckOfCards[randomId].getNumber());
+            deckOfCards[randomId].setMast(m1);
+            deckOfCards[randomId].setNumber(n1); //перемешивание карт
+
+            if (deckOfCards[l].getId() % 2 == 0) {    //если id карты будет чётным, то выдаём её второму игроку, в противном случае первому
+                deck2[l].setMast(deckOfCards[l].getMast());
+                deck2[l].setNumber(deckOfCards[l].getNumber());
+            } else {
+                deck1[l].setMast(deckOfCards[l].getMast());
+                deck1[l].setNumber(deckOfCards[l].getNumber());
+
+            }
+        }
+    }
+    public void printDeck(){
+        for (int i = 0; i < 36; i++) {
+            System.out.println(deckOfCards[i].getNumber()+deckOfCards[i].getMast()+deckOfCards[i].getId()); //вывод перемешанной колоды
+        }
+    }
+    public void printDeck1(){
+        for (int i = 1; i < 36; i=i+2) {
+            System.out.println(deck1[i].getNumber()+deck1[i].getMast()+deck1[i].getId());
+        }
+    }
+    public void printDeck2(){
+        for (int i = 0; i < 36; i=i+2) {
+            System.out.println(deck2[i].getNumber()+deck2[i].getMast()+deck2[i].getId());   //вывод раздачи карт
+        }
+    }
+
+    
+
+}
