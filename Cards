@@ -1,0 +1,17 @@
+public class Cards {
+    private String number; //номер
+    private String mast; //масть
+    public int index; //индекс
+
+    public Cards(String number,String mast,int index){
+        this.number=number;
+        this.mast=mast;
+        this.index=index; //конструктор с вызовом методов
+    }
+    public void setNumber(String n){this.number=n;}
+    public void setMast(String m){this.mast=m;} //запись значений в переменные
+    public String getNumber(){return number;}
+    public String getMast(){return mast;}
+    public int getId(){return index;} //читка значений
+
+}
