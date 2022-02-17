@@ -1,0 +1,16 @@
+public class Main {
+    public static void main(String[] args){
+
+        DeckOfCards deckOfCards = new DeckOfCards();
+        deckOfCards.setDiscription();
+        System.out.println("Простая колода");
+        deckOfCards.printDeck();
+        deckOfCards.switcher();
+        System.out.println("Перемешанная колода");
+        deckOfCards.printDeck();
+        System.out.println("Карты 1 игрока:");
+        deckOfCards.printDeck1();
+        System.out.println("Карты 2 игрока:");
+        deckOfCards.printDeck2(); //вызов всех методов
+    }
+}
