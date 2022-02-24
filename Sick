@@ -22,7 +22,7 @@ public class Sick extends Immune {
         return new Immune(this.x, this.y);
     }
 
-    public void infect(Field field){  //заражение соседних клеток
+    private void infect(Field field){  //заражение соседних клеток
 
         if (x-1>=0 && !(field.getMas1()[x-1][y] instanceof Immune) && random.nextBoolean()){
             field.setMas2(x-1, y, new Sick(x-1,y));
@@ -38,8 +38,25 @@ public class Sick extends Immune {
         }
         if (this.y+1<field.n && !(field.getMas1()[x][y+1] instanceof Immune) && random.nextBoolean()){
             field.setMas2(x, y+1, new Sick(x,y+1));
+            return;
+        }
+        if (x-1>=0 && y-1>=0 && !(field.getMas1()[x-1][y-1] instanceof Immune) && random.nextBoolean()){
+            field.setMas2(x-1, y-1, new Sick(x-1,y-1));
+            return;
+        }
+        if (this.x+1<field.n && this.y+1<field.n && !(field.getMas1()[x+1][y+1] instanceof Immune) && random.nextBoolean()) {
+            field.setMas2(x + 1, y+1, new Sick(x + 1, y+1));
+            return;
         }
 
+        if (x-1>=0 && this.y+1<field.n && !(field.getMas1()[x-1][y+1] instanceof Immune) && random.nextBoolean()){
+            field.setMas2(x-1, y+1, new Sick(x-1,y+1));
+            return;
+        }
+        if (this.x+1<field.n && y-1>=0 && !(field.getMas1()[x+1][y-1] instanceof Immune) && random.nextBoolean()) {
+            field.setMas2(x + 1, y-1, new Sick(x + 1, y-1));
+
+        }
 
     }
 
