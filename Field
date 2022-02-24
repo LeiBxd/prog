@@ -27,12 +27,33 @@ public class Field {
 
             }
         }
-        Healthy[][] newmas;         //обменять местами mas1 и mas2
+        Healthy[][] newmas;
         newmas = mas1;
         mas1 = mas2;
         mas2 = newmas;
     }
 
+    public Healthy[][] getMas1() {
+        return mas1;
+    }
+
+
+    public void setMas2(int x, int y, Healthy healthy) {
+        this.mas2[x][y] = healthy;
+    }
+
+
+    public void display(){
+        for (int i = 0 ; i < n ; i++) {
+            for (int j = 0; j < n; j++) {
+                mas1[i][j].print();
+            }
+            System.out.println();
+        }
+        System.out.println();
+        System.out.println();
+    }
+}
     public Healthy[][] getMas1() {
         return mas1;
     }
