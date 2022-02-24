@@ -6,7 +6,7 @@ public class Mainn {
 
         field.Init();
 
-        for (int i = 0; i < 50; i++) {  //время
+        for (int i = 0; i < 3; i++) {  //время
             System.out.println("time: " + i);
             field.display();
             field.update();
