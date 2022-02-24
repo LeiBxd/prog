@@ -12,7 +12,7 @@ public class Healthy { //здоровая клетка
         return this;
     }
 
-    public boolean W() {
+    protected boolean W() {
         return true;
     } // возможность заразить
 
