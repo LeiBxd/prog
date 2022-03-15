@@ -1,0 +1,11 @@
+public class Maino {
+    public static void main(String[] args) {
+        ListString myString = new ListString("Я люблю ИТМО");
+        System.out.println(myString);
+        System.out.println("Длина: " + myString.length());
+        System.out.println("Замененный символ: " + myString.charAt(2));
+        myString.setCharAt(2, 'L');
+        System.out.println(myString);
+
+    }
+}
