@@ -1,0 +1,153 @@
+public class ListString {
+
+    public ListString(String string) {
+        head = new StringItem();
+        StringItem temp = head;
+        int sum = 0;
+        while (sum+16 <= string.length()) {
+            char[] tArray = string.substring(sum, sum+16).toCharArray();
+            copyArray(tArray, temp.arrayString, 0, tArray.length-1, 0);
+            temp.size = (byte)16;
+            if (sum+16 < string.length()) {
+                temp.next = new StringItem();
+                temp = temp.next;
+                sum += 16;
+            }
+            else {
+                sum += 16;
+                break;
+            }
+        }
+        if (sum == string.length())
+            return;
+        char[] lastItemArray = string.substring(sum).toCharArray();
+        copyArray(lastItemArray, temp.arrayString, 0, lastItemArray.length-1, 0);
+        temp.size = (byte)lastItemArray.length;
+    }
+
+
+
+    public char charAt(int n){
+
+        Coordinate position = convert(n);
+        if(position.item==null)
+            throw new MyException();
+        return (position.item.arrayString[position.index]);
+
+
+    }
+
+    public void setCharAt(int index, char symbol){
+        Coordinate position = convert(index);
+        if(position.item==null)
+            throw new MyException();
+        position.item.arrayString[position.index]=symbol;
+    }
+
+    public int length(){
+        int sum = 0;
+        StringItem temp = head;
+        while(temp!=null){
+            if (temp.next!=null){
+                if(temp.size+temp.next.size>16){
+                    sum+=temp.size;
+                    temp=temp.next;
+                }
+                else{
+                    copyArray(temp.next.arrayString, temp.arrayString, 0,temp.next.size-1, temp.size);
+                    temp.size += temp.next.size;
+                    temp.next=temp.next.next;
+                }
+            }
+            else{
+                sum+=temp.size;
+                break;
+            }
+
+        }
+        return sum;
+
+    }
+
+
+
+    public String toString() {
+        char[] arrayString = new char[length()];
+        int arraySize=0;
+        StringItem temp = head;
+        while(temp!=null){
+            copyArray(temp.arrayString, arrayString, 0, temp.size-1, arraySize);
+            arraySize+= temp.size;
+            temp=temp.next;
+        }
+        return new String(arrayString);
+
+    }
+
+
+
+    //копирование символов со start по end
+    private static void copyArray(char[] fromArray, char[] toArray, int start, int end, int toStart){
+        if(end-start > toArray.length-1 - toStart){
+            return;
+        }
+        for (int i = 0; i <= end-start; i++) {
+            toArray[toStart + i] = fromArray[start + i];
+        }
+    }
+
+    private static class Coordinate{
+        private StringItem item;
+        private int index;
+
+        private Coordinate(StringItem item, int index){
+            this.item=item;
+            this.index=index;
+        }
+    }
+
+
+
+    private Coordinate convert(int userIndex){
+        //преобразование индекса, который вводит пользователь, в координаты item;index
+        StringItem temp = head;
+        if (temp!=null && userIndex>=0){
+            int sum= head.size;
+            while(sum<userIndex){
+                temp = temp.next;
+                if (temp == null){
+                    return new Coordinate(null, 0);
+                }
+                sum += temp.size;
+            }
+            return new Coordinate(temp, (temp.size-(sum-userIndex)));
+        }
+        else return new Coordinate(null, 0);
+    }
+
+    private StringItem head;
+
+    private static class StringItem {
+        private final char[] arrayString;
+        private int size;
+        private  StringItem next;
+
+
+        private StringItem(){
+            arrayString = new char[16];
+            size = (byte) 0;
+            next = null;
+        }
+    }
+}
+
+
+/*
+    void append(char ch);                      //добавить в конец символ
+
+    void append(ListString string);            //добавить в конец строку ListString
+
+    void append(String string);                //добавить в конец строку String
+
+    void insert(int index, ListString string); //вставить в строку в позицию index строку
+*/v
