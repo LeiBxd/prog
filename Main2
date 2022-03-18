@@ -1,0 +1,16 @@
+public class Main2 {
+    public static void main(String[] args) {
+
+        Deck deck = new Deck();
+
+        Player p0 = new Player();
+        Player p1 = new Player(); //создание объектов
+
+        deck.printDeck();
+        deck.shuffle();
+        deck.printDeck();
+        deck.giveCards(p0, p1);
+        p0.printPlayer();
+        p1.printPlayer(); //вызов методов
+    }
+}
