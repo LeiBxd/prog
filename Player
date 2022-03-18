@@ -1,0 +1,31 @@
+public class Player {
+    private static Card[] decklink;
+    private int index = -1;
+
+    public static void setdecklink(Card[] decklink) {
+        Player.decklink = decklink;
+    }
+    public void setIndex(int index) {
+        this.index = index;
+    }
+
+
+    public void plus(int num) {
+        int t = index;
+        while (decklink[t].getNextNumber() != -1) {
+            t = decklink[t].getNextNumber();
+        }
+        decklink[t].setNextNumber(num);
+
+    }
+
+    public void printPlayer() {
+        System.out.println("Player "+(index+1));
+        int t = index;
+        while (t != -1) {
+            decklink[t].print();
+            t = decklink[t].getNextNumber();
+        }
+        System.out.println();
+    }
+}
