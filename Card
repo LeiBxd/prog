@@ -1,0 +1,64 @@
+public class Card {
+    private int currentNumber;
+    private int nextNumber;
+
+
+    public int getNextNumber() {
+        return nextNumber;
+    }
+
+    public void setNextNumber(int nextNumber) {
+        this.nextNumber = nextNumber;
+    }
+
+    public Card(int currentNumber) {
+        this.currentNumber = currentNumber;
+        nextNumber = -1;
+    }
+
+    public void print() {
+        switch (currentNumber % 9) {
+            case 0:
+                System.out.print(" 6");
+                break;
+            case 1:
+                System.out.print(" 7");
+                break;
+            case 2:
+                System.out.print(" 8");
+                break;
+            case 3:
+                System.out.print(" 9");
+                break;
+            case 4:
+                System.out.print(" 10");
+                break;
+            case 5:
+                System.out.print(" J");
+                break;
+            case 6:
+                System.out.print(" Q");
+                break;
+            case 7:
+                System.out.print(" K");
+                break;
+            case 8:
+                System.out.print(" A");
+                break;
+        }
+        switch (currentNumber / 9) {
+            case 0:
+                System.out.print("♥");
+                break;
+            case 1:
+                System.out.print("♦");
+                break;
+            case 2:
+                System.out.print("♣");
+                break;
+            case 3:
+                System.out.print("♠");
+                break;
+        }
+    }
+}
